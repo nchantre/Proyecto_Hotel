@@ -1,3 +1,8 @@
+using DAL.Conexion;
+using DAL.Conexion.Contratos;
+using DAL.CRUD.Contratos;
+using DAL.CRUD.Implementacion;
+using DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Utilities.Profiles;
 
 namespace WbApiHotel
 {
@@ -25,6 +31,10 @@ namespace WbApiHotel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Dal
+            services.AddTransient<IConexionBD , ConexionBD>();
+            services.AddTransient<IUsuarioDAL, UsuarioDAL>();
+            services.AddAutoMapper(typeof(ConfigProfileMapper));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
